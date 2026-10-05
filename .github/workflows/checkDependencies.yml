@@ -7,10 +7,15 @@ on:
   schedule:
     - cron:  '0 0 * * *'
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
 jobs:
   check-dependencies:
     uses: eclipse-platform/eclipse.platform.releng.aggregator/.github/workflows/checkDependencies.yml@master
     with:
       author: Eclipse Platform Bot <platform-bot@eclipse.org>
     secrets:
-      token: ${{ secrets.PLATFORM_BOT_PAT }}
+      token: ${{ secrets.PLATFORM_BOT_PAT || github.token }}
